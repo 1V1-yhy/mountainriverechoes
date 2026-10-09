@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+.ingest_tmp/
 eggs/
 .eggs/
 lib/
