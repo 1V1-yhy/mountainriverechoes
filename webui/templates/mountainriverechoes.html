@@ -2528,7 +2528,7 @@ function renderIndex(){
     const goArtist = c => nav('playlist', { id: 'artist:' + c.dataset.an + '@' + (c.dataset.ag || ''), platform: 'index', name: '歌手「' + c.dataset.an + '」' });
     if (!state.hanInfo) {
       state.hanInfo = { count: 0 };
-      api('/api/ethnos').then(ed => { const _was = (state.hanInfo && state.hanInfo.count) || 0; state.hanInfo = ed.han || {}; if (currentPage === 'index' && !state.index.ethnicSel && (state.hanInfo.count || 0) !== _was) renderIndex(); }).catch(() => {});
+      api('/api/ethnos').then(ed => { const _was = (state.hanInfo && state.hanInfo.count) || 0; state.hanInfo = ed.han || {}; state.ethOnly = ed.only_name || ''; if (currentPage === 'index' && !state.index.ethnicSel && (state.hanInfo.count || 0) !== _was) renderIndex(); }).catch(() => {});
     }
     const sel = state.index.ethnicSel;
     if (!sel) {
@@ -2598,7 +2598,7 @@ function renderIndex(){
         const gi = ethGrad(g), gs = ethGradSoft(g);
         return `<div class="pl-card eth-card" draggable="true" data-eth="${esc(g)}" title="点击进入 · 拖动调整次序"><div class="cov" style="background:linear-gradient(135deg,${gs[0]},${gs[1]});color:${gi[0]};text-shadow:none">${isHan ? '汉族' : esc(g)}</div><div class="nm">${isHan ? '汉族音乐 · ' + hanCnt + ' 首' : esc(g) + '音乐 · ' + songCnt(g) + ' 首'}</div></div>`;
       };
-      eg.innerHTML = `<div class="pl-grid">${applyOrder([...new Set([...order, '汉族民间小调'])], store.get('cm_order_ethcards', ETHCARD_ORDER_DEFAULT)).map(cardOf).join('')}</div>`;
+      eg.innerHTML = `<div class="pl-grid">${applyOrder([...new Set([...order, ...(state.ethOnly ? [] : ['汉族民间小调'])])], store.get('cm_order_ethcards', ETHCARD_ORDER_DEFAULT)).map(cardOf).join('')}</div>`;
       eg.querySelectorAll('.eth-card[data-eth]').forEach(c => c.onclick = () => {
         state.index.ethnicSel = c.dataset.eth; state.index.ethEdit = false; renderIndex();
       });

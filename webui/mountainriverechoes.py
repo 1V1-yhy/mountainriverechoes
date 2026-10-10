@@ -29,8 +29,14 @@ _sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))   # 仓库根(
 from musicdl import musicdl
 from musicdl.modules import MusicClientBuilder, LyricSearchClient
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DOWNLOAD_DIR = BASE_DIR / 'downloads'
+# [MRE-EXE] PyInstaller 单文件模式: 数据(ethnos_cache/templates)随包解压到 _MEIPASS/webui
+# 注意: 打包脚本把数据放在 _MEIPASS/webui/..., 故 BASE_DIR 直接取 _MEIPASS (不要再加 /webui)
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    BASE_DIR = Path(sys._MEIPASS)
+    DOWNLOAD_DIR = (Path(os.environ.get('TEMP') or os.environ.get('TMP') or '.').absolute()) / 'mre_miao_downloads'
+else:
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    DOWNLOAD_DIR = BASE_DIR / 'downloads'
 DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 HOST, PORT = '127.0.0.1', 8766
@@ -189,6 +195,10 @@ ETHNIC_GROUPS = []
 for _i, _name in enumerate(ETHNIC_BASE):
     _kws = [f'{_name}民歌', f'{_name}歌曲'] + ETHNIC_EXTRA_KW.get(_name, []) + ETHNIC_ARTISTS.get(_name, [])
     ETHNIC_GROUPS.append({'key': f'e{_i:02d}', 'name': _name, 'kws': _kws, 'ci': _i % 10})
+# [MRE-EXE] 单民族模式: 设环境变量 MRE_ONLY_GROUP=e04 时只保留该民族(用于"只有苗族"版)
+_MRE_ONLY = os.environ.get('MRE_ONLY_GROUP')
+if _MRE_ONLY:
+    ETHNIC_GROUPS = [g for g in ETHNIC_GROUPS if g['key'] == _MRE_ONLY]
 # 汉族民间小调: 各省市民间小调搜索词(与民族音乐严格区分)
 HAN_FOLK_KWS = [
     '汉族民间小调', '汉族民歌', '中国民歌', '民间小调', '民歌小调',
@@ -3433,7 +3443,8 @@ def api_ethnos():
     with suppress(Exception):
         _han_cnt = json.loads(han_path.read_text(encoding='utf-8')).get('count', 0) if han_path.exists() else 0
     han_done = han_path.exists() and _han_cnt > 0
-    return jsonify({'groups': groups, 'building': building, 'done': done, 'total': len(ETHNIC_GROUPS), 'jingpo': dict(jingpo_state),
+    return jsonify({'groups': groups, 'building': building, 'done': done, 'total': len(ETHNIC_GROUPS), 'only_name': (ETHNIC_GROUPS[0]['name'] if _MRE_ONLY and ETHNIC_GROUPS else ''),
+                    'jingpo': dict(jingpo_state),
                     'han': {'state': HAN_BUILD_STATE['state'], 'count': HAN_BUILD_STATE['count'] or _han_cnt, 'progress': HAN_BUILD_STATE['progress'], 'done': han_done}})
 
 
@@ -3514,6 +3525,12 @@ def _compute_index_data():
         for g, c in grp_counts:
             artist_list.append({'name': nm, 'group': g, 'count': c, 'cover': a['cover'], 'confirmed': nm in ETHNIC_CONFIRMED})
     artist_list.sort(key=lambda x: (-x['count'], x['name']))
+    # [MRE-EXE] 单民族模式: ETHNIC_CONFIRMED 会把苗族库里混入的知名歌手(韩红->藏族、
+    # 腾格尔/凤凰传奇->蒙古族、崔健->朝鲜族、茶艾南->佤族等)划到其它民族, 导致索引页
+    # 冒出其它民族卡片。单民族模式下强制只保留该民族的歌手卡片。
+    if _MRE_ONLY and ETHNIC_GROUPS:
+        _only_name = ETHNIC_GROUPS[0]['name']
+        artist_list = [a for a in artist_list if a['group'] == _only_name]
     playlists = []
     for g in ETHNIC_GROUPS:
         st = ethnos_state.get(g['key'], {})
