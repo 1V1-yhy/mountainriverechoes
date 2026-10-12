@@ -653,7 +653,7 @@ tr:hover .td-act{opacity:1}
   <aside id="sidebar">
     <div class="logo">
       <div class="logo-icon"><svg viewBox="0 0 24 24"><use href="#i-note"/></svg></div>
-      <div><b>山河回响</b><small>听见56个民族的音乐</small></div>
+      <div><b id="brand-name">山河回响</b><small id="brand-sub">听见56个民族的音乐</small></div>
     </div>
     <nav id="nav">
       <div class="nav-title">在线音乐</div>
@@ -729,8 +729,8 @@ tr:hover .td-act{opacity:1}
       <div class="page" id="page-index">
         <div class="ethnos-hero">
           <div>
-            <h2>五十六个民族 · 音乐地图</h2>
-            <p>遍历多音源聚合搜索，为 56个少数民族逐一构建民族音乐歌单（民歌 / 特色曲种 / 民族语言歌曲）</p>
+            <h2 id="idx-hero-title">五十六个民族 · 音乐地图</h2>
+            <p id="idx-hero-sub">遍历多音源聚合搜索，为 56个少数民族逐一构建民族音乐歌单（民歌 / 特色曲种 / 民族语言歌曲）</p>
           </div>
           <div class="ethnos-hero-acts">
             <button class="btn ethnos-btn" id="ethnos-stop" style="display:none">停止构建</button>
@@ -2305,6 +2305,7 @@ async function loadEthnos(){
     const d = await api('/api/ethnos');
     const prevDone = (state.ethnos.groups || []).filter(g => g.state === 'done').length;
     state.ethnos.groups = d.groups || []; state.ethnos.building = d.building; state.ethnos.hanDone = !!(d.han && d.han.done);
+    state.ethOnly = d.only_name || state.ethOnly || '';
     state.hanInfo = d.han || state.hanInfo || {};
     if (d.done !== prevDone) state.index.data = null;   /* 新歌单构建完成 -> 索引需要刷新 */
     renderEthnos();
@@ -2336,7 +2337,7 @@ function renderEthnos(){
     const ethOrder = store.get('cm_order_ethcards', ETHCARD_ORDER_DEFAULT) || [];
     const eIdx = new Map(ethOrder.map((n, i) => [n, i]));
     const cardKeyOf = nm => (nm === '汉族' ? '汉族民间小调' : nm);
-    const zoneCards = [...groups.map(g => ({ nm: g.name, html: ethCardHTML(g) })), { nm: '汉族民间小调', html: hanCard }]
+    const zoneCards = [...groups.map(g => ({ nm: g.name, html: ethCardHTML(g) })), ...(state.ethOnly ? [] : [{ nm: '汉族民间小调', html: hanCard }])]
       .sort((a, b) => ((eIdx.get(cardKeyOf(a.nm)) ?? 1e9) - (eIdx.get(cardKeyOf(b.nm)) ?? 1e9)));
     grid.innerHTML = zoneCards.map(c => c.html).join('') || '<div class="empty">加载中...</div>';
     const hc = grid.querySelector('.eth-card[data-k="han"]');
@@ -2528,7 +2529,17 @@ function renderIndex(){
     const goArtist = c => nav('playlist', { id: 'artist:' + c.dataset.an + '@' + (c.dataset.ag || ''), platform: 'index', name: '歌手「' + c.dataset.an + '」' });
     if (!state.hanInfo) {
       state.hanInfo = { count: 0 };
-      api('/api/ethnos').then(ed => { const _was = (state.hanInfo && state.hanInfo.count) || 0; state.hanInfo = ed.han || {}; state.ethOnly = ed.only_name || ''; if (currentPage === 'index' && !state.index.ethnicSel && (state.hanInfo.count || 0) !== _was) renderIndex(); }).catch(() => {});
+      api('/api/ethnos').then(ed => { const _was = (state.hanInfo && state.hanInfo.count) || 0; const _wasOnly = state.ethOnly || ''; state.hanInfo = ed.han || {}; state.ethOnly = ed.only_name || '';
+        /* [MRE-EXE] 单民族模式: 品牌名/副标题/首页横幅改为该民族专属 */
+        if (state.ethOnly) {
+          document.title = state.ethOnly + '音乐';
+          const _bn = $('#brand-name'), _bs = $('#brand-sub'), _ht = $('#idx-hero-title'), _hs = $('#idx-hero-sub');
+          if (_bn) _bn.textContent = state.ethOnly + '音乐';
+          if (_bs) _bs.textContent = '听见' + state.ethOnly + '的音乐';
+          if (_ht) _ht.textContent = state.ethOnly + ' · 音乐地图';
+          if (_hs) _hs.textContent = state.ethOnly + '音乐歌单（民歌 / 特色曲种 / 民族语言歌曲）';
+        }
+        if (currentPage === 'index' && !state.index.ethnicSel && ((state.hanInfo.count || 0) !== _was || state.ethOnly !== _wasOnly)) renderIndex(); }).catch(() => {});
     }
     const sel = state.index.ethnicSel;
     if (!sel) {
