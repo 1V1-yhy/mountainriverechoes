@@ -2,7 +2,7 @@
 苗族音乐播放器 —— PyInstaller 打包脚本
 用法:
     python build_miao_exe.py
-产物: dist/miao_player.exe  (双击即弹出内嵌原生窗口应用, 不调用系统浏览器)
+产物: dist/苗族曲库.exe  (双击即弹出内嵌原生窗口应用, 不调用系统浏览器)
 '''
 import os
 import sys
@@ -18,11 +18,14 @@ ENTRY = ROOT / 'webui' / 'miao_entry.py'
 MIAO_JSON = ROOT / 'webui' / 'ethnos_cache' / 'e04_苗族.json'
 TEMPLATES = ROOT / 'webui' / 'templates'
 
+ICON = ROOT / 'icon_work' / 'miao_icon.ico'
+
 PYINSTALLER = [
     str(VENV_PY), '-m', 'PyInstaller',
     '--noconfirm', '--clean',
     '--onefile',
-    '--name', 'miao_player',
+    '--name', '苗族曲库',
+    '--icon', str(ICON),
     '--windowed',                 # 无控制台黑窗
     '--paths', str(ROOT),         # 让 PyInstaller 找到 musicdl(仓库根)
     '--paths', str(ROOT / 'webui'),
@@ -56,7 +59,7 @@ def main():
     print('开始打包(单文件, 仅苗族歌单), 请稍候 ...')
     # 在 ROOT 下执行, 保证相对路径正确
     subprocess.run(PYINSTALLER, cwd=str(ROOT), check=True)
-    out = ROOT / 'dist' / 'miao_player.exe'
+    out = ROOT / 'dist' / '苗族曲库.exe'
     print('完成! 可执行文件:', out if out.exists() else '(未生成, 请检查上方报错)')
 
 

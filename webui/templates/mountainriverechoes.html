@@ -613,6 +613,281 @@ tr:hover .td-act{opacity:1}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
 @media (max-width:1120px){ #np-body{gap:36px} }
 </style>
+
+<!-- ================================================================
+     苗族音乐 · 酷狗风深色皮肤
+     深靛蓝渐变 × 苗银高光 × 朱红点缀 × 蝴蝶妈妈图腾 × 苗绣几何纹样
+     靠后加载覆盖上方浅色主题; 同特异度规则后者生效, 个别用 !important
+     压制 HTML 内联图标色, 使侧栏图标统一为酷狗式单色
+     ================================================================ -->
+<style id="skin-miao">
+:root{
+  --acc:#5b9dff; --acc2:#3fd0e0;
+  --acc-grad:linear-gradient(135deg,#5b9dff,#38c7d8);
+  --silver:#c7d3ee;
+  --skin-line:rgba(148,163,216,.14);
+  --skin-panel:rgba(255,255,255,.05);
+  --skin-shadow:0 12px 38px rgba(2,6,24,.5);
+  /* 重定义全局浅色变量 → 深色 */
+  --bg:#0d1230; --side:transparent; --side-hover:rgba(255,255,255,.06); --side-active:rgba(91,157,255,.16);
+  --txt:#e9edfb; --txt2:#a9b3d6; --txt3:#68719a;
+  --line:rgba(148,163,216,.14); --row-hover:rgba(91,157,255,.08);
+  --focus:0 0 0 3px rgba(91,157,255,.3);
+  --sh-1:0 1px 3px rgba(2,6,24,.4); --sh-2:0 2px 10px rgba(2,6,24,.42);
+  --sh-3:0 8px 26px rgba(2,6,24,.5); --sh-4:0 16px 46px rgba(2,6,24,.6);
+  --red:#ff5d5d;
+}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:5px;border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.28);background-clip:content-box}
+/* ---------- 窗体骨架: 深靛蓝渐变 + 双侧光晕 ---------- */
+body{background:#0a0e24}
+#app{background:
+  radial-gradient(1100px 520px at 88% -12%, rgba(64,120,255,.17), transparent 62%),
+  radial-gradient(900px 480px at -8% 112%, rgba(63,208,224,.11), transparent 60%),
+  linear-gradient(158deg,#151b45 0%,#0d1230 46%,#111840 100%)}
+#main{background:transparent}
+#content{background:transparent}
+/* ---------- 侧栏 ---------- */
+#sidebar{background:linear-gradient(180deg,rgba(8,11,28,.6),rgba(8,11,28,.32));border-right:1px solid var(--skin-line)}
+.logo b{color:#f2f5ff}
+.logo-icon{background:linear-gradient(135deg,#3b56c0,#38c7d8);box-shadow:0 3px 14px rgba(59,86,192,.55)}
+#sidebar .logo-icon svg{fill:#fff;stroke:#fff;stroke-width:1.4}
+#nav .nav-item .ic{color:var(--txt2)!important}
+#nav .nav-item.active .ic{color:var(--acc)!important}
+#nav .nav-item .grow{color:inherit!important}
+#nav .nav-title{color:#5d6794}
+.nav-item{color:var(--txt2)}
+.nav-item:hover{background:rgba(255,255,255,.06)}
+.nav-item.active{background:linear-gradient(90deg,rgba(91,157,255,.22),rgba(91,157,255,.07));color:#fff;box-shadow:none}
+.nav-ethnos:hover{background:rgba(255,255,255,.06)}
+.nav-indexhl:hover{background:rgba(255,255,255,.06)}
+.nav-item .pl-del:hover{color:#ff8080;background:rgba(236,65,65,.14)}
+.side-foot{border-top:1px solid var(--skin-line)}
+.side-foot button:hover{background:rgba(255,255,255,.07);color:var(--txt)}
+/* ---------- 顶栏 ---------- */
+#topbar{border-bottom:1px solid var(--skin-line);background:rgba(9,13,32,.22)}
+.round-btn{background:rgba(255,255,255,.08);color:var(--txt2)}
+.round-btn:hover:not(:disabled){background:rgba(255,255,255,.16);color:var(--txt)}
+#searchbox .box{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.06);color:var(--txt2)}
+#searchbox .box:focus-within{background:rgba(255,255,255,.13);border-color:rgba(91,157,255,.45);box-shadow:0 2px 12px rgba(2,6,24,.35)}
+#searchbox input{color:var(--txt)}
+#searchbox input::placeholder{color:var(--txt3)}
+#search-hist{background:#151b42;border:1px solid var(--skin-line);box-shadow:var(--skin-shadow)}
+#search-hist .h-row:hover{background:rgba(255,255,255,.07)}
+#topbar.scrolled{box-shadow:0 8px 22px rgba(2,6,24,.35)}
+/* ---------- 按钮 / chips / 表单 ---------- */
+.btn-primary{background:var(--acc-grad);color:#fff;box-shadow:0 3px 12px rgba(63,120,255,.35)}
+.btn-plain{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.13);color:var(--txt2)}
+.btn-plain:hover{border-color:var(--acc);color:var(--acc)}
+.chip{background:rgba(255,255,255,.06);color:var(--txt2)}
+.chip:hover{background:rgba(255,255,255,.11)}
+.chip.on{background:rgba(91,157,255,.18);color:#8fc0ff;border-color:rgba(91,157,255,.42)}
+.filter-input{background:rgba(255,255,255,.07);color:var(--txt)}
+select{background:#151b42;color:var(--txt);border:1px solid var(--skin-line);border-radius:8px;padding:6px 10px}
+.dlg-body input,.dlg-body select,.dlg-foot input{background:rgba(255,255,255,.06);border:1px solid var(--skin-line);border-radius:8px;color:var(--txt);padding:7px 10px}
+.batch-mode .bchk,.batchbar input[type=checkbox]{background:#101638;border-color:#4a547e}
+.batch-mode .bchk:hover{border-color:var(--acc)}
+.batch-mode .bchk:checked,.batchbar input[type=checkbox]:checked,
+.batchbar input[type=checkbox]:indeterminate{border-color:var(--acc);background-color:var(--acc)}
+/* ---------- 歌曲表 ---------- */
+.song-table td{border-bottom-color:rgba(255,255,255,.05)}
+.song-table tr:hover td{background:var(--row-hover)}
+.song-table tr.playing td{background:rgba(91,157,255,.13)}
+.td-name .t.now{color:var(--acc)}
+.td-act button:hover{color:var(--acc);background:rgba(91,157,255,.15)}
+.td-act button.a-rm:hover{color:#ff8080;background:rgba(236,65,65,.13)}
+.batchbar{background:rgba(15,20,50,.97);border-color:var(--skin-line)}
+.batch-mode tbody tr.on{background:rgba(91,157,255,.12)}
+.pltable tr.is-pinned td{background:rgba(201,150,44,.09)}
+/* ---------- 发现/榜单 ---------- */
+.hero{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='150' viewBox='0 0 24 22'%3E%3Cpath d='M12 9.2C10.4 5.6 5.9 3.6 3.5 6c-2.3 2.3-1 5.9 2.4 7.3-2.6 1.2-3.6 4.4-1.8 6.4 2.1 2.3 6.1 1 7.9-2.7 1.8 3.7 5.8 5 7.9 2.7 1.8-2 .8-5.2-1.8-6.4 3.4-1.4 4.7-5 2.4-7.3-2.4-2.4-6.9-.4-8.5 3.2z' fill='%23c7d3ee' fill-opacity='.13'/%3E%3C/svg%3E") no-repeat right -14px top -16px/190px,
+  linear-gradient(115deg,#2a3b8f 0%,#1c2a66 45%,#0e4d5e 100%)}
+.chart-card{background:var(--skin-panel);border:1px solid var(--skin-line)}
+.chart-item{border-bottom-color:rgba(255,255,255,.05)}
+.chart-item .nm:hover{color:var(--acc)}
+.chart-item:nth-child(2) .rk,.chart-item:nth-child(3) .rk,.chart-item:nth-child(4) .rk{color:var(--acc)}
+.sec-title a:hover{color:var(--acc)}
+/* ---------- 民族专区 hero: 蝴蝶妈妈水印 + 苗绣纹样条 ---------- */
+.ethnos-hero{background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='170' viewBox='0 0 24 22'%3E%3Cpath d='M12 9.2C10.4 5.6 5.9 3.6 3.5 6c-2.3 2.3-1 5.9 2.4 7.3-2.6 1.2-3.6 4.4-1.8 6.4 2.1 2.3 6.1 1 7.9-2.7 1.8 3.7 5.8 5 7.9 2.7 1.8-2 .8-5.2-1.8-6.4 3.4-1.4 4.7-5 2.4-7.3-2.4-2.4-6.9-.4-8.5 3.2z' fill='%23c7d3ee' fill-opacity='.16'/%3E%3C/svg%3E") no-repeat right -10px top -14px/210px,
+  linear-gradient(115deg,#2a3b8f 0%,#1c2a66 45%,#0e4d5e 100%)}
+.ethnos-hero::after{background:radial-gradient(circle,rgba(199,211,238,.22),transparent 65%)}
+.ethnos-hero::before{content:'';position:absolute;left:0;right:0;bottom:0;height:5px;opacity:.6;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='5' viewBox='0 0 24 5'%3E%3Cpath d='M0 2.5 6 0l6 2.5L6 5zM12 2.5 18 0l6 2.5L18 5z' fill='%23c7d3ee'/%3E%3C/svg%3E") repeat-x;background-size:24px 5px}
+.ethnos-btn{background:rgba(255,255,255,.92);color:#1c2a66}
+.ethnos-progress{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.13)}
+.ethnos-bar{background:rgba(255,255,255,.1)}
+.ethnos-fill{background:var(--acc-grad)}
+.eth-head{box-shadow:var(--sh-2)}
+/* ---------- 民族歌手目录 / 行 ---------- */
+.eth-row:hover{background:rgba(255,255,255,.05)}
+.eth-row.on{background:rgba(91,157,255,.13)}
+.eth-row.on .nm{color:var(--acc)}
+.eth-artist:hover{background:rgba(255,255,255,.05)}
+.eth-row .row-ops button{background:#1a2150;border-color:rgba(255,255,255,.15);color:var(--txt2)}
+.eth-row .row-ops button:hover{background:rgba(255,255,255,.1)}
+.eth-row .row-ops button.pinned{background:rgba(201,150,44,.16);border-color:rgba(201,150,44,.45);color:#e5c069}
+.eth-row.is-pinned{background:rgba(201,150,44,.09)}
+.eth-adel{color:#ff8080}
+.eth-adel:hover{background:rgba(236,65,65,.13);color:#ff8080}
+.eth-amove{color:#e5c069;border-color:rgba(201,150,44,.4);background:rgba(201,150,44,.08)}
+.eth-amove:hover{background:rgba(201,150,44,.16);color:#f0cf80}
+.eth-apin{color:#8fa3d0;border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05)}
+.eth-apin:hover{background:rgba(255,255,255,.1);color:#b9c7ea}
+.eth-apin.on{color:#e5c069;border-color:rgba(201,150,44,.4);background:rgba(201,150,44,.08)}
+.eth-more{color:var(--acc);border-color:rgba(91,157,255,.38)}
+.eth-more:hover{background:rgba(91,157,255,.1)}
+.eth-removedbar{background:rgba(201,150,44,.09);border-color:rgba(201,150,44,.3);color:#d9b96a}
+.as-newrow{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15)}
+.eth-batchbar{background:rgba(15,20,50,.97);border-color:var(--skin-line)}
+.eth-batchbar b{color:var(--acc)}
+/* ---------- 播放页(黑胶) 深夜化 ---------- */
+#nowplaying{background:
+  radial-gradient(1000px 520px at 82% -12%, rgba(64,120,255,.2), transparent 62%),
+  linear-gradient(168deg,#161d48 0%,#0d1230 55%,#122050 100%);
+  box-shadow:0 0 90px rgba(2,6,24,.65)}
+#np-close{color:rgba(255,255,255,.55)}
+#np-close:hover{color:#fff}
+.np-btn{background:rgba(255,255,255,.08);color:var(--txt2)}
+.np-btn:hover{background:rgba(255,255,255,.17);color:var(--txt)}
+#np-title{color:#fff}
+.lrc-line{color:rgba(255,255,255,.32)}
+.lrc-line:hover{color:rgba(255,255,255,.62)}
+.lrc-line.on{color:#fff}
+.lrc-addlink{color:var(--acc)}
+#dlg-lyric textarea{background:rgba(255,255,255,.05);color:var(--txt);border-color:var(--skin-line)}
+.fm-disc{background:conic-gradient(from 30deg,#2a3b8f,#0e4d5e,#5b9dff,#2a3b8f);box-shadow:0 16px 50px rgba(43,80,200,.4)}
+.fm-disc .inner{color:var(--acc)}
+/* ---------- 底部播放条: 暗色玻璃 + 苗银高光线 ---------- */
+#playerbar{position:relative;background:linear-gradient(180deg,rgba(10,14,34,.88),rgba(7,10,26,.96));
+  border-top:1px solid var(--skin-line);backdrop-filter:blur(12px)}
+#playerbar::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 4%,rgba(91,157,255,.55) 30%,rgba(63,208,224,.45) 55%,transparent 96%)}
+#pb-cover{background:#1a2150}
+#pb-cover .ph{background:#1a2150;color:#4c5680}
+.pb-left .heart{color:#5d6794}
+.pb-btn{color:#8b95c4}
+.pb-btn:hover{color:var(--txt)}
+.pb-btn.dim{color:#5d6794}
+.pb-btn.dim:hover{color:var(--txt)}
+.pb-btn.on{color:var(--acc)}
+.pb-song .nm:hover{color:var(--acc)}
+.pb-prog .time{color:#5d6794}
+.bar{background:rgba(255,255,255,.11)}
+.bar .fill{background:var(--acc-grad);box-shadow:0 0 8px rgba(91,157,255,.45)}
+.bar .dot{background:#eaf2ff;box-shadow:0 1px 6px rgba(2,6,24,.5)}
+#pb-play{background:var(--acc-grad);box-shadow:0 3px 14px rgba(63,120,255,.5)}
+#pb-count{background:var(--acc)}
+#vol-pop{background:#151b42;border:1px solid var(--skin-line);box-shadow:var(--skin-shadow)}
+/* ---------- 抽屉 / 对话框 / 菜单 ---------- */
+#drawer{background:#131940;border:1px solid var(--skin-line);box-shadow:var(--skin-shadow)}
+.dw-row:hover{background:rgba(255,255,255,.06)}
+.dw-row.playing{color:var(--acc)}
+.dw-head button:hover{color:var(--acc)}
+.dw-row .rm:hover{color:var(--acc)}
+.overlay{background:rgba(4,7,20,.62)}
+.dlg{background:#131940;border:1px solid var(--skin-line)}
+.dlg-close:hover{color:var(--txt);background:rgba(255,255,255,.08)}
+.src-pill{background:rgba(255,255,255,.07)}
+.src-pill.ok{color:#4ade80;background:rgba(20,160,100,.16)}
+.ms-row:hover{background:rgba(255,255,255,.05)}
+.ms-row .cb{border-color:#4a547e;background:transparent}
+.ms-row.sel .cb{background:var(--acc);border-color:var(--acc)}
+#as-list .p{border-color:var(--skin-line)}
+#as-list .p:hover{border-color:var(--acc);background:rgba(91,157,255,.08)}
+.mv-grid .p{border-color:var(--skin-line)}
+.mv-grid .p:hover{border-color:var(--acc)}
+.mv-grid .p.on{background:var(--acc);border-color:var(--acc)}
+.move-menu{background:#161c44;border:1px solid var(--skin-line);box-shadow:var(--skin-shadow)}
+.move-menu .mm-i:hover{background:rgba(255,255,255,.07)}
+#kbd-help{background:rgba(4,7,20,.6)}
+#kbd-help .kh-card{background:#131940;border:1px solid var(--skin-line)}
+#kbd-help kbd{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:var(--txt)}
+.src-checks label{background:rgba(255,255,255,.05);color:var(--txt2)}
+.src-checks label:hover{border-color:rgba(255,255,255,.16)}
+.src-checks label.on{background:rgba(91,157,255,.14);color:#8fc0ff;border-color:rgba(91,157,255,.42)}
+.dl-status.queued{background:rgba(255,255,255,.08)}
+.dl-status.downloading{background:rgba(236,65,65,.16)}
+.dl-status.done{background:rgba(20,160,100,.16)}
+.dl-status.failed{background:rgba(236,65,65,.16)}
+/* ---------- tabs / 杂项 ---------- */
+.stab.on::after{background:var(--acc-grad)}
+.spin{border-color:rgba(255,255,255,.16);border-top-color:var(--acc)}
+.sk{background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 37%,rgba(255,255,255,.05) 63%);background-size:400% 100%}
+.pl-card .cov .play-cov,.eth-card .cov .play-cov{color:var(--acc)}
+.nav-item.active .badge{background:var(--acc)}
+/* ===================== 苗族曲库 · 新版皮肤增强 ===================== */
+:root{ --miao:#e0533d; --gold:#e5c069; --miao-grad:linear-gradient(135deg,#e0533d,#ff8a5c); }
+/* 全页面苗族纹样水印(蜡染菱形格) */
+#app::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46' viewBox='0 0 46 46'%3E%3Cpath d='M23 4 29 23 23 42 17 23zM4 23 23 17 42 23 23 29z' fill='none' stroke='%23e5c069' stroke-width='1' stroke-opacity='.55'/%3E%3C/svg%3E")}
+#sidebar,#topbar,#content,#playerbar{position:relative;z-index:1}
+/* 侧栏 logo: 靛蓝→苗红, 更显民族味 */
+.logo-icon{background:linear-gradient(135deg,#3b56c0,#e0533d)!important;box-shadow:0 3px 14px rgba(224,83,61,.5)!important}
+/* 激活页签下划线改为苗红 */
+.stab.on::after{background:var(--miao-grad)!important}
+/* ---------- KuGou 风 轮播 banner ---------- */
+.kg-banner{position:relative;height:224px;border-radius:18px;overflow:hidden;box-shadow:var(--sh-3);margin-bottom:6px}
+.kg-slides{display:flex;height:100%;transition:transform .6s cubic-bezier(.22,.61,.36,1)}
+.kg-slide{flex:0 0 100%;height:100%;position:relative;display:flex;align-items:center;padding:0 52px;overflow:hidden}
+.kg-slide::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 120% at 85% 15%,rgba(255,255,255,.22),transparent 55%)}
+.kg-bf{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:230px;height:230px;opacity:.9;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 9.2C10.4 5.6 5.9 3.6 3.5 6c-2.3 2.3-1 5.9 2.4 7.3-2.6 1.2-3.6 4.4-1.8 6.4 2.1 2.3 6.1 1 7.9-2.7 1.8 3.7 5.8 5 7.9 2.7 1.8-2 .8-5.2-1.8-6.4 3.4-1.4 4.7-5 2.4-7.3-2.4-2.4-6.9-.4-8.5 3.2z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat center/contain;filter:drop-shadow(0 4px 18px rgba(0,0,0,.25))}
+.kg-txt{position:relative;z-index:2;max-width:62%}
+.kg-tag{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,.92);margin-bottom:10px;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+.kg-txt h2{font-size:36px;font-weight:800;color:#fff;margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,.35);letter-spacing:2px}
+.kg-txt p{font-size:14.5px;color:rgba(255,255,255,.92);margin:0 0 20px;line-height:1.7;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+.kg-go{background:#fff;color:#1c2a66;border:none;padding:10px 24px;border-radius:22px;font-weight:800;cursor:pointer;font-size:13.5px;box-shadow:0 6px 18px rgba(0,0,0,.28);transition:.2s}
+.kg-go:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.kg-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:none;background:rgba(0,0,0,.28);color:#fff;font-size:24px;line-height:1;cursor:pointer;z-index:3;display:grid;place-items:center;transition:.2s}
+.kg-arrow:hover{background:rgba(0,0,0,.5)}
+.kg-prev{left:14px}.kg-next{right:14px}
+.kg-dots{position:absolute;bottom:14px;left:52px;display:flex;gap:8px;z-index:3}
+.kg-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:.3s}
+.kg-dot.on{width:24px;border-radius:5px;background:#fff}
+.kg-embroider{position:absolute;left:0;right:0;bottom:0;height:7px;opacity:.85;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'%3E%3Cpath d='M0 5 7 0l7 5L7 10zM14 5 21 0l7 5L21 10z' fill='%23e5c069'/%3E%3C/svg%3E") repeat-x;background-size:28px 10px}
+/* ---------- 板块标题(苗族纹样分隔 + 苗印) ---------- */
+.miao-sec{display:flex;align-items:center;gap:10px;margin:28px 2px 16px}
+.miao-sec b{font-size:19px;color:#fff;font-weight:800;letter-spacing:2px}
+.miao-sec span{font-size:12.5px;color:var(--txt3)}
+.miao-sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(229,192,105,.35),transparent)}
+.miao-seal{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-style:normal;font-weight:800;color:#fff;font-size:15px;background:var(--miao-grad);box-shadow:0 3px 12px rgba(224,83,61,.5)}
+/* ---------- 为你精选 / 猜你喜欢 卡片 ---------- */
+.miao-picks .cov,.miao-guess .cov{aspect-ratio:1;border-radius:14px;position:relative;overflow:hidden;box-shadow:var(--sh-2)}
+.pick-emoji{position:absolute;inset:0;display:grid;place-items:center;font-size:46px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.pick-embroider{position:absolute;left:0;right:0;bottom:0;height:6px;opacity:.8;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='5' viewBox='0 0 24 5'%3E%3Cpath d='M0 2.5 6 0l6 2.5L6 5zM12 2.5 18 0l6 2.5L18 5z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x;background-size:24px 5px}
+.pick-card:hover .cov,.guess-card:hover .cov{transform:translateY(-4px);box-shadow:0 14px 34px rgba(224,83,61,.4)}
+.miao-picks .nm,.miao-guess .nm{margin-top:9px;font-size:13.5px;font-weight:700;color:var(--txt)}
+.miao-picks .sub,.miao-guess .sub{font-size:11.5px;color:var(--txt3);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.guess-card .cov img{width:100%;height:100%;object-fit:cover;border-radius:14px;position:relative;z-index:2;transition:transform .35s}
+.guess-card:hover .cov img{transform:scale(1.06)}
+/* ---------- 无封面苗族风占位: 渐变+歌名首字+蝴蝶水印+苗绣底边 ---------- */
+.miao-ph{position:absolute;inset:0;display:grid;place-items:center}
+.miao-ph::before{content:'';position:absolute;inset:0;background:radial-gradient(115% 115% at 80% 12%,rgba(255,255,255,.24),transparent 55%)}
+.miao-ph b{position:relative;z-index:2;font-size:34px;font-weight:800;color:#fff;letter-spacing:2px;text-shadow:0 3px 16px rgba(0,0,0,.4)}
+.miao-ph .ph-bf{position:absolute;right:5px;bottom:7px;width:50px;height:50px;opacity:.3;z-index:1;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 9.2C10.4 5.6 5.9 3.6 3.5 6c-2.3 2.3-1 5.9 2.4 7.3-2.6 1.2-3.6 4.4-1.8 6.4 2.1 2.3 6.1 1 7.9-2.7 1.8 3.7 5.8 5 7.9 2.7 1.8-2 .8-5.2-1.8-6.4 3.4-1.4 4.7-5 2.4-7.3-2.4-2.4-6.9-.4-8.5 3.2z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat center/contain}
+.miao-ph .pick-embroider{z-index:2}
+/* ---------- 为你精选: 点击即跳转样式 ---------- */
+.pick-go{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:8px 18px;border-radius:20px;background:rgba(0,0,0,.52);color:#fff;font-size:13px;font-weight:700;letter-spacing:1px;opacity:0;transition:.2s;backdrop-filter:blur(2px);z-index:3;white-space:nowrap}
+.pick-card:hover .pick-go{opacity:1}
+.pick-card:hover .pick-emoji{opacity:.25}
+.pick-go{box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.nm-go{float:right;color:var(--acc);font-weight:800;transition:transform .2s}
+.pick-card:hover .nm-go{transform:translateX(4px)}
+.g-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;display:grid;place-items:center;font-size:16px;opacity:0;transition:.2s;backdrop-filter:blur(2px)}
+.guess-card:hover .g-play{opacity:1}
+/* ---------- 热门歌手 ---------- */
+.miao-artists{display:flex;gap:16px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:thin}
+.artist-card{flex:0 0 auto;width:96px;text-align:center;cursor:pointer}
+.artist-card .av{width:84px;height:84px;border-radius:50%;margin:0 auto 8px;background:linear-gradient(135deg,#3b56c0,#38c7d8);display:grid;place-items:center;color:#fff;font-size:30px;font-weight:800;box-shadow:0 6px 18px rgba(43,80,200,.4);border:2px solid rgba(199,211,238,.55);transition:.2s}
+.artist-card:hover .av{transform:translateY(-4px);box-shadow:0 12px 28px rgba(224,83,61,.5);border-color:var(--miao)}
+.artist-card .nm{font-size:13px;color:var(--txt);max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.artist-card .ct{font-size:11px;color:var(--txt3)}
+</style>
 </head>
 <body>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -646,6 +921,7 @@ tr:hover .td-act{opacity:1}
 <symbol id="i-arrow-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
 <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
 <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-bf" viewBox="0 0 24 24"><path d="M12 9.2C10.4 5.6 5.9 3.6 3.5 6c-2.3 2.3-1 5.9 2.4 7.3-2.6 1.2-3.6 4.4-1.8 6.4 2.1 2.3 6.1 1 7.9-2.7 1.8 3.7 5.8 5 7.9 2.7 1.8-2 .8-5.2-1.8-6.4 3.4-1.4 4.7-5 2.4-7.3-2.4-2.4-6.9-.4-8.5 3.2z"/><path d="M12 9.5v7.6" stroke-width="1.6"/><path d="M10.3 6.2 8.8 3.9M13.7 6.2l1.5-2.3" stroke-width="1.3"/></symbol>
 </svg>
 
 <div id="app">
@@ -653,7 +929,7 @@ tr:hover .td-act{opacity:1}
   <aside id="sidebar">
     <div class="logo">
       <div class="logo-icon"><svg viewBox="0 0 24 24"><use href="#i-note"/></svg></div>
-      <div><b id="brand-name">山河回响</b><small id="brand-sub">听见56个民族的音乐</small></div>
+      <div><b id="brand-name">苗族曲库</b><small id="brand-sub">听见苗乡的声音</small></div>
     </div>
     <nav id="nav">
       <div class="nav-title">在线音乐</div>
@@ -725,22 +1001,34 @@ tr:hover .td-act{opacity:1}
         </tr></thead><tbody id="history-tbody"></tbody></table>
       </div>
 
-      <!-- 音乐库索引 (默认首页) -->
+      <!-- 苗族曲库 · 为你精选 (默认首页) -->
       <div class="page" id="page-index">
-        <div class="ethnos-hero">
-          <div>
-            <h2 id="idx-hero-title">五十六个民族 · 音乐地图</h2>
-            <p id="idx-hero-sub">遍历多音源聚合搜索，为 56个少数民族逐一构建民族音乐歌单（民歌 / 特色曲种 / 民族语言歌曲）</p>
+        <div id="miao-home">
+          <!-- KuGou 风 轮播 banner -->
+          <div class="kg-banner" id="kg-banner">
+            <div class="kg-slides" id="kg-slides"></div>
+            <button class="kg-arrow kg-prev" id="kg-prev" aria-label="上一张">‹</button>
+            <button class="kg-arrow kg-next" id="kg-next" aria-label="下一张">›</button>
+            <div class="kg-dots" id="kg-dots"></div>
+            <div class="kg-embroider"></div>
           </div>
-          <div class="ethnos-hero-acts">
-            <button class="btn ethnos-btn" id="ethnos-stop" style="display:none">停止构建</button>
-          </div>
+          <!-- 为你精选 -->
+          <div class="miao-sec"><b>为你精选</b><span>苗族音乐 · 精心整理</span><i class="miao-seal">苗</i></div>
+          <div class="pl-grid miao-picks" id="miao-picks"></div>
+          <!-- 热门歌手 -->
+          <div class="miao-sec"><b>热门歌手</b><span>苗族代表性歌唱者</span></div>
+          <div class="miao-artists" id="miao-artists"></div>
+          <!-- 猜你喜欢 -->
+          <div class="miao-sec"><b>猜你喜欢</b><span>根据你的曲库推荐</span></div>
+          <div class="pl-grid miao-guess" id="miao-guess"><div class="sk" style="height:160px;border-radius:14px"></div></div>
         </div>
+        <!-- 民族构建进度(多民族模式用, 单民族常隐藏) -->
         <div class="ethnos-progress" id="ethnos-progress" style="display:none">
           <div class="ethnos-bar"><div class="ethnos-fill" id="ethnos-fill"></div></div>
           <span id="ethnos-prog-text" style="font-size:12px;color:#8a6d1a"></span>
         </div>
-        <div class="page-title">音乐库索引<small id="idx-sub"></small></div>
+        <!-- 全部曲风 -->
+        <div class="page-title" style="margin-top:34px">全部曲风<small id="idx-sub"></small></div>
         <div class="stabs" style="margin-bottom:18px">
           <div class="stab on" data-itab="ethnos">民族</div>
           <div class="stab" data-itab="topics">专题</div>
@@ -1308,7 +1596,7 @@ function render(page, params){
   if (page === 'favorites') renderFavorites();
   if (page === 'fm') renderFM();
   if (page === 'ethnos') { loadEthnos(); }
-  if (page === 'index') { loadIndex(); loadEthnos(); }
+  if (page === 'index') { loadIndex(); loadEthnos(); renderMiaoHome(); } else { stopKgCarousel(); }
   if (page === 'history') renderHistory();
 }
 
@@ -2349,7 +2637,7 @@ function renderEthnos(){
     prog.style.display = building ? '' : 'none';
     $('#ethnos-fill').style.width = (done / 55 * 100).toFixed(1) + '%';
     $('#ethnos-prog-text').textContent = `已构建 ${done} / 55 个民族歌单${building ? '，正在后台遍历音源搜索...' : ''}`;
-    $('#ethnos-stop').style.display = building ? '' : 'none';
+    const _estop = $('#ethnos-stop'); if (_estop) _estop.style.display = building ? '' : 'none';
   }
   $$('.eth-card[data-k]').forEach(card => card.onclick = async () => {
     const k = card.dataset.k;
@@ -2364,9 +2652,9 @@ function renderEthnos(){
   });
   $$('.eth-card[data-more]').forEach(card => card.onclick = () => nav('ethnos'));
 }
-$('#ethnos-stop').onclick = async () => {
+{ const _estopBtn = $('#ethnos-stop'); if (_estopBtn) _estopBtn.onclick = async () => {
   try { await api('/api/ethnos/build', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'stop' }) }); toast('已请求停止，完成当前民族后停止'); } catch(err){}
-};
+}; }
 
 /* ================================================================ 音乐库索引 */
 /* 索引自愈: 库文件签名变了就重拉索引(限频 6 秒), 保证歌手/曲目列表不会停在旧快照上 */
@@ -2392,10 +2680,10 @@ async function maybeRefreshIndex(){
 }
 
 async function loadIndex(force){
-  if (state.index.data && !force) { renderIndex(); return; }
+  if (state.index.data && !force) { renderIndex(); renderMiaoHome(); return; }
   try {
     const d = await api('/api/index');
-    state.index.data = d; renderIndex();
+    state.index.data = d; renderIndex(); renderMiaoHome();
   } catch(err){}
 }
 
@@ -2488,6 +2776,138 @@ function bindEthBatch(sel, shownList){
   ethBatchRefresh();
 }
 
+/* ================================================================ 苗族曲库 · 为你精选 首页 */
+const MIAO_BANNER = [
+  { t:'苗族飞歌', s:'高亢悠扬的山地长歌 · 把思念唱给云听', kw:'苗族飞歌', g:['#2a3b8f','#38c7d8'] },
+  { t:'芦笙悠扬', s:'苗乡节庆的吹奏之乐 · 一管芦笙醉千山', kw:'芦笙', g:['#7a3ea8','#38c7d8'] },
+  { t:'苗语情歌', s:'用母语唱出的爱意 · 山间对唱的绵绵情', kw:'苗语歌曲', g:['#c0392b','#e0913a'] },
+  { t:'苗族古歌', s:'世代传唱的创世史诗 · 蝴蝶妈妈的传说', kw:'苗族古歌', g:['#1c2a66','#3b56c0'] },
+];
+const MIAO_PICKS = [
+  { t:'苗族飞歌精选', d:'高亢悠扬的山地长歌', kw:'苗族飞歌', g:['#3b56c0','#38c7d8'], e:'🎵' },
+  { t:'芦笙乐曲', d:'苗乡节庆的吹奏之乐', kw:'芦笙', g:['#7a3ea8','#38c7d8'], e:'🎶' },
+  { t:'苗语原声', d:'母语唱出的原生态', kw:'苗语歌曲', g:['#c0392b','#e0913a'], e:'🗣️' },
+  { t:'苗族古歌', d:'世代传唱的创世史诗', kw:'苗族古歌', g:['#1c2a66','#3b56c0'], e:'📜' },
+  { t:'苗族情歌', d:'对唱中的绵绵情意', kw:'苗族情歌', g:['#b5327a','#38c7d8'], e:'💞' },
+  { t:'苗族民歌', d:'田间地头的山野之歌', kw:'苗族民歌', g:['#2a7d5a','#38c7d8'], e:'🏞️' },
+];
+function openMiaoTheme(kw){
+  state.index.mode='song'; state.index.ethnicSel=null; state.index.tab='ethnos'; state.index.filter='';
+  const fi=$('#eth-filter'); if(fi) fi.value=kw;
+  renderIndex();
+  runSongSearch(kw, 0);
+  const mh=$('#miao-home'); if(mh) mh.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function openMiaoArtist(name, group){
+  nav('playlist', { id:'artist:'+name+'@'+(group||''), platform:'index', name:'歌手「'+name+'」' });
+}
+function renderMiaoBanner(){
+  const slides=$('#kg-slides'), dots=$('#kg-dots');
+  if(!slides) return;
+  slides.innerHTML = MIAO_BANNER.map((b,i)=>`<div class="kg-slide" data-i="${i}" style="background:linear-gradient(120deg,${b.g[0]},${b.g[1]});cursor:pointer" data-kw="${esc(b.kw)}">
+      <div class="kg-bf"></div>
+      <div class="kg-txt">
+        <div class="kg-tag">苗族曲库 · 为你精选</div>
+        <h2>${esc(b.t)}</h2>
+        <p>${esc(b.s)}</p>
+        <button class="kg-go" type="button">立即聆听 ›</button>
+      </div>
+    </div>`).join('');
+  dots.innerHTML = MIAO_BANNER.map((_,i)=>`<span class="kg-dot${i===0?' on':''}" data-i="${i}"></span>`).join('');
+  slides.querySelectorAll('.kg-slide').forEach(s=>s.onclick=()=>openMiaoTheme(s.dataset.kw));
+  dots.querySelectorAll('.kg-dot').forEach(d=>d.onclick=()=>goKgSlide(+d.dataset.i,true));
+  const pv=$('#kg-prev'), nx=$('#kg-next');
+  if(pv) pv.onclick=()=>goKgSlide((state.kgIdx||0)-1,true);
+  if(nx) nx.onclick=()=>goKgSlide((state.kgIdx||0)+1,true);
+  goKgSlide(0,false);
+}
+function goKgSlide(i, manual){
+  const n=MIAO_BANNER.length; i=((i%n)+n)%n; state.kgIdx=i;
+  const slides=$('#kg-slides'); if(slides) slides.style.transform=`translateX(${-i*100}%)`;
+  $$('#kg-dots .kg-dot').forEach((d,k)=>d.classList.toggle('on',k===i));
+  if(manual && state.kgTimer){ clearInterval(state.kgTimer); startKgCarousel(); }
+}
+function startKgCarousel(){
+  if(state.kgTimer) return;
+  state.kgTimer=setInterval(()=>goKgSlide((state.kgIdx||0)+1,false), 4500);
+}
+function stopKgCarousel(){ if(state.kgTimer){ clearInterval(state.kgTimer); state.kgTimer=null; } }
+function renderMiaoPicks(){
+  const box=$('#miao-picks'); if(!box) return;
+  box.innerHTML = MIAO_PICKS.map(p=>`<div class="pl-card pick-card" data-kw="${esc(p.kw)}" style="cursor:pointer">
+      <div class="cov" style="background:linear-gradient(135deg,${p.g[0]},${p.g[1]});color:#fff">
+        <span class="pick-emoji">${p.e}</span>
+        <span class="pick-embroider"></span>
+        <span class="pick-go">立即聆听 ›</span>
+      </div>
+      <div class="nm">${esc(p.t)}<span class="nm-go">›</span></div>
+      <div class="sub">${esc(p.d)}</div>
+    </div>`).join('');
+  box.querySelectorAll('.pick-card').forEach(c=>c.onclick=()=>openMiaoTheme(c.dataset.kw));
+}
+function renderMiaoArtists(){
+  const box=$('#miao-artists'); if(!box) return;
+  const arts=((state.index.data&&state.index.data.artists)||[]).filter(a=>(a.count||0)>0).sort((a,b)=>(b.count||0)-(a.count||0)).slice(0,14);
+  if(!arts.length){ box.innerHTML=''; return; }
+  box.innerHTML = arts.map(a=>`<div class="artist-card" data-n="${esc(a.name)}" data-g="${esc(a.group||'')}" style="cursor:pointer">
+      <div class="av" ${a.cover?`style="background-image:url('/api/cover?url=${encodeURIComponent(a.cover)}');background-size:cover"`:''}>${a.cover?'':esc((a.name||'?')[0])}</div>
+      <div class="nm">${esc(a.name)}</div>
+      <div class="ct">${a.count} 首</div>
+    </div>`).join('');
+  box.querySelectorAll('.artist-card').forEach(c=>c.onclick=()=>openMiaoArtist(c.dataset.n,c.dataset.g));
+}
+async function loadMiaoGuess(){
+  const box=$('#miao-guess'); if(!box) return;
+  const qs=['苗族飞歌','芦笙','苗族情歌','苗语歌曲','苗族民歌','苗族古歌'];
+  let items=[], tail=[];   /* tail: 无封面的备选, 仅在有封面曲不足时补位 */
+  const _dk=t=>((t.song_name||t.name||'')+'|'+(t.singers||t.artist||''));
+  const _seen=new Set();
+  for(const q of qs){
+    try{
+      const d=await api('/api/index/search?q='+encodeURIComponent(q)+'&limit=14&offset=0');
+      const ts=d.tracks||[];
+      ts.filter(t=>t.cover_url).slice(0,4).forEach(t=>{ if(!_seen.has(_dk(t))){ _seen.add(_dk(t)); items.push({ t, sid:d.sid }); } });
+      ts.filter(t=>!t.cover_url).slice(0,2).forEach(t=>{ if(!_seen.has(_dk(t))){ _seen.add(_dk(t)); tail.push({ t, sid:d.sid }); } });
+    }catch(e){}
+    if(items.length>=18) break;
+  }
+  items=items.concat(tail);   /* 封面优先, 不够再用无封面的补齐 */
+  items=items.sort(()=>Math.random()-0.5).slice(0,15);
+  state.miaoGuess=items;
+  renderMiaoGuess();
+}
+function renderMiaoGuess(){
+  const box=$('#miao-guess'); if(!box) return;
+  const items=state.miaoGuess||[];
+  if(!items.length){ box.innerHTML='<div class="empty">暂无推荐</div>'; return; }
+  /* 苗族风占位: 按歌名哈希取配色, 垫在最底层; 封面图加载成功盖住它, 失败自动露出 */
+  const PH_G=[['#3b2a8f','#38c7d8'],['#6a2f9e','#e0913a'],['#b5327a','#38c7d8'],['#1c5a4a','#7fd8c4'],['#8a3b2a','#e0b13a'],['#2a3b8f','#b56ad8']];
+  const phH=s=>{let h=0;for(const c of String(s||'苗'))h=(h*31+c.charCodeAt(0))>>>0;return h;};
+  box.innerHTML = items.map((it,i)=>{ const t=it.t; const _g=PH_G[phH(t.song_name||t.name)%PH_G.length]; const _ch=esc((t.song_name||t.name||'苗')[0]); return `<div class="pl-card guess-card" data-i="${i}" style="cursor:pointer">
+      <div class="cov" style="background:linear-gradient(135deg,${_g[0]},${_g[1]})">
+        <div class="miao-ph"><b>${_ch}</b><span class="ph-bf"></span><i class="pick-embroider"></i></div>
+        ${t.cover_url?`<img src="/api/cover?url=${encodeURIComponent(t.cover_url)}" onerror="this.remove()">`:''}
+        <span class="g-play">▶</span>
+      </div>
+      <div class="nm">${esc(t.song_name||t.name||'')}</div>
+      <div class="sub">${esc(t.singers||t.artist||'')}</div>
+    </div>`; }).join('');
+  box.querySelectorAll('.guess-card').forEach(c=>c.onclick=()=>{
+    const it=items[+c.dataset.i]; const t=it.t, sid=it.sid;
+    const mk=x=>({name:x.song_name||x.name, artist:x.singers||x.artist, album:x.album, duration:x.duration, cover:x.cover_url, sid:sid||x.sid, id:x.id, source:x.source, source_cn:x.source_cn||state.srcNames[x.source]});
+    playTrack(mk(t),{list:items.map(x=>mk(x.t))});
+  });
+}
+function buildMiaoStatic(){
+  if(state.miaoStaticBuilt) return;
+  renderMiaoBanner(); renderMiaoPicks(); state.miaoStaticBuilt=true;
+}
+async function renderMiaoHome(){
+  buildMiaoStatic();
+  renderMiaoArtists();
+  startKgCarousel();
+  await loadMiaoGuess();
+}
 function renderIndex(){
   if (!(state.ethnos.groups || []).length) loadEthnos();   /* 深链直开索引页时补拉民族状态(徽标/发现页计数) */
   const d = state.index.data;
@@ -2532,12 +2952,12 @@ function renderIndex(){
       api('/api/ethnos').then(ed => { const _was = (state.hanInfo && state.hanInfo.count) || 0; const _wasOnly = state.ethOnly || ''; state.hanInfo = ed.han || {}; state.ethOnly = ed.only_name || '';
         /* [MRE-EXE] 单民族模式: 品牌名/副标题/首页横幅改为该民族专属 */
         if (state.ethOnly) {
-          document.title = state.ethOnly + '音乐';
-          const _bn = $('#brand-name'), _bs = $('#brand-sub'), _ht = $('#idx-hero-title'), _hs = $('#idx-hero-sub');
-          if (_bn) _bn.textContent = state.ethOnly + '音乐';
-          if (_bs) _bs.textContent = '听见' + state.ethOnly + '的音乐';
-          if (_ht) _ht.textContent = state.ethOnly + ' · 音乐地图';
-          if (_hs) _hs.textContent = state.ethOnly + '音乐歌单（民歌 / 特色曲种 / 民族语言歌曲）';
+          document.title = state.ethOnly + '曲库';
+          const _bn = $('#brand-name'), _bs = $('#brand-sub');
+          if (_bn) _bn.textContent = state.ethOnly + '曲库';
+          if (_bs) _bs.textContent = '听见苗乡的声音';
+          const _li = document.querySelector('.logo-icon');
+          if (_li && !_li.dataset.bf) { _li.innerHTML = '<svg viewBox="0 0 24 24"><use href="#i-bf"/></svg>'; _li.dataset.bf = '1'; }
         }
         if (currentPage === 'index' && !state.index.ethnicSel && ((state.hanInfo.count || 0) !== _was || state.ethOnly !== _wasOnly)) renderIndex(); }).catch(() => {});
     }
